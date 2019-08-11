@@ -1,0 +1,8 @@
+server:
+  port: 1001
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  instance:
+    hostname: peer1
