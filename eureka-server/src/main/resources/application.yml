@@ -5,4 +5,7 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
   instance:
-    hostname: peer1
+    hostname: localhost
+    prefer-ip-address: true
+  server:
+    enable-self-preservation: true

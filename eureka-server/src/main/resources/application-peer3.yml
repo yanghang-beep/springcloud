@@ -1,0 +1,13 @@
+server:
+  port: 1003
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://peer1:1001/eureka/,http://peer2:1002/eureka/
+  instance:
+    hostname: peer3
+    prefer-ip-address: true
+  server:
+    enable-self-preservation: true

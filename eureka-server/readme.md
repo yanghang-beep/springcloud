@@ -261,3 +261,23 @@ delete: {ip:port}/eureka/apps/{appname}/{id}
  
  com.netflix.eureka.lease.LeaseManager，这个接口定义了这几项操作。
  com.netflix.discovery.shared.LookupService ，这个接口定义了Client端从注册中心获取服务列表的方法。
+##  Eureka的设计理念
+###  AP优于CP
+什么是分布式系统领域的CAP理论。下面这篇文章写的非常好，我给大家贴出来。
+https://blog.csdn.net/yeyazhishang/article/details/80758354
+
+总结来说就是，Eureka的设计理念就是及时响应优于数据一致性。
+###  Peer 2 Peer
+一版来说，分布式系统的数据在多个副本之间的复制方式，可分为主从复制和对等复制。
+###  主从复制
+主从复制也就是广为人知的Master-Slave模式，即有一个主副本、其他的副本为从副本。所有的对数据的写操作都提交到主副本，最后再由主副本更新到其他的从副本。
+对于主从复制来讲，写的压力都在主副本上，它是整个系统的瓶颈，但是从副本可以帮主副本分担读请求。
+
+###  对等复制
+即Peer 2 Peer模式，副本之间部分主从，任何副本都可以接受写操作，然后每个副本之间进行数据更新。
+对于对等复制来说，由于任何副本都可以接收写操作，不存在写操作的压力瓶颈。但是由于每个副本之间都可以进行写操作处理，各个副本之间的数据同步及冲突处理是一个比较棘手的问题。
+Eureka采用的就是这种复制方式。
+
+###  Zone和Region设计
+![Region和Zone的原理图](https://img-blog.csdnimg.cn/20190812000333239.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTI5MzYx,size_16,color_FFFFFF,t_70)
+就是服务的消费者会优先去找同一个Zone的服务的提供者。当发现提供不了的时候才会去找另外Zone的的服务提供者。
