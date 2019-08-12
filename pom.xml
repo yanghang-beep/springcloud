@@ -21,6 +21,7 @@
         <module>eureka-server</module>
         <module>eureka-client</module>
         <module>feign-client</module>
+        <module>feign-server</module>
     </modules>
 
     <properties>
@@ -38,6 +39,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
