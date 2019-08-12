@@ -8,6 +8,5 @@ eureka:
       defaultZone: http://peer1:1001/eureka/,http://peer3:1003/eureka/
   instance:
     hostname: peer2
-    prefer-ip-address: true
   server:
     enable-self-preservation: true
